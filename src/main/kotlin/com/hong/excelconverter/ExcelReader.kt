@@ -2,10 +2,8 @@ package com.hong.excelconverter
 
 import com.hong.excelconverter.exception.ExtensionNotValidException
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.springframework.stereotype.Service
 import java.io.File
 
-@Service
 class ExcelReader : ExcelReadable {
 
     override fun checkExtension(file: File) : Boolean {
