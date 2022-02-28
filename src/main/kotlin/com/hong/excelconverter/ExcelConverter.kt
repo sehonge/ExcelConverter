@@ -9,7 +9,6 @@ import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.springframework.stereotype.Service
 import java.lang.reflect.Method
 import java.math.BigDecimal
 import java.util.stream.Stream
@@ -19,7 +18,6 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.jvmErasure
 
-@Service
 @Slf4j
 class ExcelConverter : ExcelConvertable {
 
