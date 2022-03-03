@@ -1,9 +1,9 @@
 package com.hong.excelconverter.fixture
 
-import com.hong.excelconverter.dto.Essential
+import com.hong.excelconverter.annotation.Essential
+import com.hong.excelconverter.annotation.Name
+import com.hong.excelconverter.annotation.TypeConverter
 import com.hong.excelconverter.dto.LocalDateConverter
-import com.hong.excelconverter.dto.Name
-import com.hong.excelconverter.dto.TypeConverter
 import java.time.LocalDate
 
 data class FixtureDate(
