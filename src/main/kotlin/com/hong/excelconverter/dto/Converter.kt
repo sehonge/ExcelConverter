@@ -21,34 +21,11 @@ object LocalDateConverter : Converter<Int, LocalDate?> {
     }
 }
 
-object FrontPhotoUrlEnumConverter : Converter<Int, FrontPhotoUrlType?> {
-    override fun convert(input: Int): FrontPhotoUrlType? {
-        return FrontPhotoUrlType.values().find {
-            it.codeNumber == input
+object BusinessTypeEnumConverter : Converter<String, BusinessType?> {
+    override fun convert(input: String): BusinessType? {
+        return BusinessType.values().find {
+            it.Desc == input
         }
     }
-}
 
-object AlipayFeeContractIdEnumConverter : Converter<Int, AlipayFeeContractIdType?> {
-    override fun convert(input: Int): AlipayFeeContractIdType? {
-        return AlipayFeeContractIdType.values().find {
-            it.codeNumber == input
-        }
-    }
-}
-
-object TransferDateEnumConverter : Converter<Int, TransferDateType?> {
-    override fun convert(input: Int): TransferDateType? {
-        return TransferDateType.values().find {
-            it.codeNumber == input
-        }
-    }
-}
-
-object BankcorpCdEnumConverter : Converter<String, BankcorpCdType?> {
-    override fun convert(input: String): BankcorpCdType? {
-        return BankcorpCdType.values().find {
-            it.codeDesc.contains(input)
-        }
-    }
 }
