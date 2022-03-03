@@ -55,5 +55,4 @@ class ExcelWriter: ExcelWritable {
         }
         return workbook
     }
-
 }

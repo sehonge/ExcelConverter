@@ -47,6 +47,4 @@ internal class ExcelReaderTest {
         // then
         Assertions.assertThat(checkExtension).isTrue
     }
-
-
 }

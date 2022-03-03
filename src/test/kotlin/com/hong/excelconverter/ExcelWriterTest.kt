@@ -3,7 +3,7 @@ package com.hong.excelconverter
 import com.hong.excelconverter.fixture.TestFixtureB
 import org.apache.poi.ss.usermodel.IndexedColors
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -36,6 +36,4 @@ internal class ExcelWriterTest {
             FileDeleter().fileDelete(outputFile) // Local에 저장되어 있는 file을 삭제
         }
     }
-
-
 }
