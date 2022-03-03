@@ -33,7 +33,7 @@ internal class ExcelWriterTest {
             val cellForegroundColor: Short = workbook2.getSheetAt(0).getRow(10).getCell(1).cellStyle.fillForegroundColor
             assertEquals(cellForegroundColor ,IndexedColors.LIGHT_BLUE.index)
 
-            FileDeleter().fileDelete(outputFile) // Local에 저장되어 있는 file을 삭제
+//            FileDeleter().fileDelete(outputFile) // Local에 저장되어 있는 file을 삭제
         }
     }
 }
