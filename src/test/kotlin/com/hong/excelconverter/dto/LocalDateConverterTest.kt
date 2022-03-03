@@ -6,10 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.LocalDate
 
-@DisplayName("LocalDateConverter")
+@DisplayName("LocalDateConverterTest")
 internal class LocalDateConverterTest {
 
-    @ParameterizedTest(name="Int type의 {0}를 LocalDateConverter로 convert 하면 {1} 값을 던진다.")
+    @ParameterizedTest(name="Int type의 {0}를 LocalDateConverter로 convert 하면 {1} 값을 리턴한다.")
     @CsvSource(value=[
         "19940605,1994-06-05",
         "20210228,2021-02-28",
