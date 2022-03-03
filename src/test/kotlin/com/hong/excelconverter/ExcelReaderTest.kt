@@ -24,7 +24,7 @@ internal class ExcelReaderTest {
     @DisplayName("ExcelFile의 extension이 .xlsx가 아니라면 ExtensionNotValidException를 던진다.")
     fun `ExcelFile의 extension이 xlsx가 아니라면 ExtensionNotValidException를 던진다`() {
         // given
-        val path = "src/test/resources/ExcelFileWrongExtension.xlss"
+        val path = "src/test/resources/ExcelFileWrongExtension.txt"
         val file: File = File(path)
 
         // when
