@@ -41,20 +41,19 @@ internal class ExcelConverterTest {
 
         @Test
         @DisplayName("Excel file Row에서 잘못된 데이터가 존재하면, Stream<CellError>를 반환한다.")
-        fun `Excel file에서 잘못된 데이터가 존재하면, Stream{CellError} 반환한다`() {
+        fun `Excel file에서 잘못된 데이터가 존재하면, Stream{CellError}로 반환한다`() {
             // given
             val path = "src/test/resources/ExcelWrongFile.xlsx"
             val file = File(path)
-            val given = TestFixtureB("check", "pong", TransferDateType.FIRST)
+            val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
             val stream: Stream<Any> = ExcelConverter().getObjectStream(workbook, given::class)
 
             // then
-            stream.forEach {
-                Assertions.assertThat(it::class).isEqualTo(CellError::class)
-            }
+            Assertions.assertThat(stream.map { any -> any::class })
+                .contains(CellError::class)
         }
 
         @Test
