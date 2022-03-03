@@ -21,9 +21,9 @@ internal class ExcelConverterTest {
         @DisplayName("Excel file의 Row에서 모든 데이터가 정상적으로 입력되어 있으면, Stream<T>를 반환한다.")
         fun `Excel file의 Row에서 모든 데이터가 정상적으로 입력되어 있으면, Stream{T}를 반환한다`() {
             // given
-            val path = "src/test/resources/ExcelFileFixture.xlsx"
+            val path = "src/test/resources/ExcelFileFixtureDate.xlsx"
             val file = File(path)
-            val given = TestFixtureB("check", "pong", TransferDateType.FIRST)
+            val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
 
             // when

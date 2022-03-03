@@ -128,7 +128,7 @@ class ExcelConverter : ExcelConvertable {
 
     private fun <T> convertData(input: T, instance : Any?) : Any? {
         instance ?: throw NullInstanceException("Object Instance is Not Exist")
-        val method = instance.javaClass.declaredMethods.find { it: Method -> it.name == "convert" }
+        val method = instance.javaClass.declaredMethods.find { it: Method -> it.name.equals("convert") }
         return method?.invoke(instance, input)
     }
 
