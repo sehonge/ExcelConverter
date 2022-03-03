@@ -1,6 +1,6 @@
 package com.hong.excelconverter
 
-import com.hong.excelconverter.fixture.TestFixtureB
+import com.hong.excelconverter.fixture.FixtureDate
 import org.apache.poi.ss.usermodel.IndexedColors
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -20,10 +20,10 @@ internal class ExcelWriterTest {
         @DisplayName("ExcelConverter의 getObjectStream으로부터 나온 Stream<Any>의 정보와 origin file을 사용해 잘못 작성된 cell에 색을 칠한 excelFile을 반환한다. ")
         fun `ExcelConverter의 getObjectStream으로부터 나온 Stream{Any}의 CellError들의 정보와 originFile을 사용해 잘못 작성된 cell에 색을 칠한 excelFile을 반환한다` () {
             // given
-            val path = "src/test/resources/ExcelMixedFile.xlsx"
+            val path = "src/test/resources/ExcelWrongFile.xlsx"
             val file: File = File(path)
             val workbook: XSSFWorkbook = ExcelReader().getWorkbook(file)
-            val stream: Stream<Any> = ExcelConverter().getObjectStream(workbook, TestFixtureB::class)
+            val stream: Stream<Any> = ExcelConverter().getObjectStream(workbook, FixtureDate::class)
 
             // when
             val outputFile = ExcelWriter().writeExcel(file, stream)

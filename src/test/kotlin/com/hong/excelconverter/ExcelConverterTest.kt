@@ -1,11 +1,10 @@
 package com.hong.excelconverter
 
+import com.hong.excelconverter.dto.BusinessType
 import com.hong.excelconverter.dto.CellError
-import com.hong.excelconverter.dto.TransferDateType
+import com.hong.excelconverter.fixture.FixtureBusinessType
 import com.hong.excelconverter.fixture.FixtureDate
 import com.hong.excelconverter.fixture.TestBigDecimal
-import com.hong.excelconverter.fixture.TestFixtureB
-import com.hong.excelconverter.fixture.TestLocalDate
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -62,7 +61,7 @@ internal class ExcelConverterTest {
             // given
             val path = "src/test/resources/ExcelMixedFile.xlsx"
             val file = File(path)
-            val given = TestFixtureB("check", "pong", TransferDateType.FIRST)
+            val given = FixtureBusinessType("check", "pong", BusinessType.FRANCHISE)
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
@@ -70,7 +69,7 @@ internal class ExcelConverterTest {
 
             // then
             stream.forEach {
-                Assertions.assertThat(it::class).isIn(TestFixtureB::class, CellError::class)
+                Assertions.assertThat(it::class).isIn(given::class, CellError::class)
             }
         }
 
@@ -78,9 +77,9 @@ internal class ExcelConverterTest {
         @DisplayName("Excel file의 row에서 필수적인 property의 정보를 가진 cell이 공백이라면 CellError를 반환한다.")
         fun `Excel file의 row에서 필수적인 property의 정보를 가진 cell이 공백이라면 CellError를 반환한다`() {
             // given
-            val path = "src/test/resources/ExcelBlank.xlsx"
+            val path = "src/test/resources/ExcelMixedFile.xlsx"
             val file = File(path)
-            val given = TestFixtureB("check", "pong", TransferDateType.FIRST)
+            val given = FixtureBusinessType("check", "pong", BusinessType.FRANCHISE)
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
@@ -88,7 +87,7 @@ internal class ExcelConverterTest {
 
             // then
             stream.forEach {
-                Assertions.assertThat(it::class).isIn(TestFixtureB::class, CellError::class)
+                Assertions.assertThat(it::class).isIn(given::class, CellError::class)
             }
         }
 
@@ -98,7 +97,7 @@ internal class ExcelConverterTest {
             // given
             val path = "src/test/resources/ExcelFileBigDecimal.xlsx"
             val file = File(path)
-            val given = TestBigDecimal(BigDecimal("201.02"), "pong", TransferDateType.FIRST)
+            val given = TestBigDecimal(BigDecimal("201.02"), "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
@@ -114,9 +113,9 @@ internal class ExcelConverterTest {
         @DisplayName("Excel file에서 cell의 날짜 정보가 잘못 입력된 경우, CellError로 처리한다.")
         fun `Excel file에서 cell의 날짜 정보가 잘못 입력된 경우, CellError로 처리한다`() {
             // given
-            val path = "src/test/resources/ExcelWrongDateFile.xlsx"
+            val path = "src/test/resources/ExcelFileWrongDate.xlsx"
             val file = File(path)
-            val given = TestLocalDate("201.02", "pong", TransferDateType.FIRST, LocalDate.of(1994,6,5))
+            val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
