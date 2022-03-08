@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
+    jacoco
 }
 
 group = "com.hong"
@@ -38,6 +39,37 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+//  test task에서 JUnit을 사용한다고 Gradle에 알려주는 것입니다.
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+jacoco {
+    // JaCoCo 버전
+    toolVersion = "0.8.7"
+}
+
+tasks {
+    jacocoTestReport {
+        reports {
+            // 원하는 리포트를 켜고 끌 수 있습니다.
+            html.required.set(true)
+            xml.required.set(false)
+            csv.required.set(false)
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                element = "CLASS"
+
+                limit {
+                    counter = "BRANCH"
+                    value = "COVEREDRATIO"
+                    minimum = "0.80".toBigDecimal()
+                }
+            }
+        }
+    }
 }
