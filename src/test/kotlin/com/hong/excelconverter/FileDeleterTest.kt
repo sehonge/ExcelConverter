@@ -25,4 +25,18 @@ internal class FileDeleterTest {
         // then
         Assertions.assertEquals(true, isDeleted)
     }
+
+    @Test
+    @DisplayName("Local에 존재하지않는 file을 삭제하려 하면 NoSuchFileException를 반환한다.")
+    fun testNoSuckFileException() {
+        val path = "src/test/resources/noFile.xlsx"
+        val file: File = File(path)
+
+        // when
+        // then
+        Assertions.assertThrows(NoSuchFileException::class.java) {
+            FileDeleter().fileDelete(file)
+        }
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.hong.excelconverter
 
 import java.io.File
-import java.nio.file.NoSuchFileException
 
 class FileDeleter : FileDeletable {
 
@@ -13,7 +12,7 @@ class FileDeleter : FileDeletable {
 
     private fun isExist(excelFile: File) {
         if (!excelFile.exists()) {
-            throw NoSuchFileException("file(${excelFile.absolutePath}) does not exist")
+            throw NoSuchFileException(file = excelFile,reason = "file(${excelFile.absolutePath}) does not exist")
         }
     }
 }
