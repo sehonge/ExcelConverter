@@ -8,7 +8,7 @@
  - [x] Jacoco 사용해서 Test Coverage 확인하기
    - 종료했다가 다시 빌드하니까 작동한다
    - covered ratio 0.80 이상을 목표로 수정
-   - [ ] ExcelReader covered ratio : 0.75
+   - [x] ExcelReader covered ratio : 0.75
    - [ ] ExcelConverter covered ratio : 0.73
-   - [ ] FileDeleter covered ratio : 0.50
+   - [x] FileDeleter covered ratio : 0.50
 
