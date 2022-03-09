@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import java.io.File
 
 @DisplayName("Excel Read Test")
@@ -34,12 +36,14 @@ internal class ExcelReaderTest {
         }
     }
 
-    @Test
-    @DisplayName("ExcelFile의 extension이 .xlsx가 라면 true를 반환한다.")
-    fun `ExcelFile의 extension이 xlsx가 라면 true를 반환한다`() {
+    @ParameterizedTest(name = "ExcelFile의 extension이 {0}라면 true를 반환한다.")
+    @CsvSource(value = [
+        "src/test/resources/ExcelFileFixtureDate.xlsx",
+        "src/test/resources/ExcelFilexls.xls"
+    ])
+    fun `ExcelFile의 extension이 xlsx가 라면 true를 반환한다`(input: String) {
         // given
-        val path = "src/test/resources/ExcelFileFixtureDate.xlsx"
-        val file: File = File(path)
+        val file: File = File(input)
 
         // when
         val checkExtension = ExcelReader().checkExtension(file)
