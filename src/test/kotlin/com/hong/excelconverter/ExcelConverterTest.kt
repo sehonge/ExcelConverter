@@ -2,13 +2,16 @@ package com.hong.excelconverter
 
 import com.hong.excelconverter.dto.BusinessType
 import com.hong.excelconverter.dto.CellError
+import com.hong.excelconverter.exception.NullAnnotationException
 import com.hong.excelconverter.fixture.FixtureBusinessType
 import com.hong.excelconverter.fixture.FixtureDate
+import com.hong.excelconverter.fixture.FixtureNoNameAnnotation
 import com.hong.excelconverter.fixture.TestBigDecimal
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.io.File
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -124,6 +127,22 @@ internal class ExcelConverterTest {
             // then
             stream.forEach {
                 Assertions.assertThat(it::class).isEqualTo(CellError::class)
+            }
+        }
+
+        @Test
+        @DisplayName("getObjectStream의 parameter인 metaData 클래스 선언에 Name Annotation이 없다면, NullAnnotationException을 던진다.")
+        fun `getObjectStream의 parameter인 metaData 클래스 선언에 Name Annotation이 없다면, NullAnnotationException을 던진다`() {
+            // given
+            val path = "src/test/resources/ExcelFileFixtureDate.xlsx"
+            val file = File(path)
+            val given = FixtureNoNameAnnotation("check", "pong", LocalDate.of(1994,6,5))
+            val workbook = ExcelReader().getWorkbook(file)
+
+            // when
+            // then
+            assertThrows<NullAnnotationException> {
+                ExcelConverter().getObjectStream(workbook, given::class)
             }
         }
 

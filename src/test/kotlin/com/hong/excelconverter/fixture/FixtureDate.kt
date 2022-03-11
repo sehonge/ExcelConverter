@@ -26,3 +26,9 @@ data class TestBigDecimal (
     @Name("BrandName") @Essential val brandName: String,
     @Name("BirthDay") @TypeConverter(convert = LocalDateConverter::class) val birthDay: LocalDate?
 )
+
+data class FixtureNoNameAnnotation (
+    @Name("checksum") @Essential val checksum: String,
+    @Essential val brandName: String,
+    @Name("BirthDay") @TypeConverter(convert = LocalDateConverter::class) val birthDay: LocalDate?
+    )
