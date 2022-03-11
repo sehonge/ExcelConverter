@@ -3,10 +3,11 @@ package com.hong.excelconverter
 import com.hong.excelconverter.dto.BusinessType
 import com.hong.excelconverter.dto.CellError
 import com.hong.excelconverter.exception.NullAnnotationException
+import com.hong.excelconverter.exception.NullElementException
+import com.hong.excelconverter.fixture.FixtureBigDecimal
 import com.hong.excelconverter.fixture.FixtureBusinessType
 import com.hong.excelconverter.fixture.FixtureDate
 import com.hong.excelconverter.fixture.FixtureNoNameAnnotation
-import com.hong.excelconverter.fixture.TestBigDecimal
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -100,7 +101,7 @@ internal class ExcelConverterTest {
             // given
             val path = "src/test/resources/ExcelFileBigDecimal.xlsx"
             val file = File(path)
-            val given = TestBigDecimal(BigDecimal("201.02"), "pong", LocalDate.of(1994,6,5))
+            val given = FixtureBigDecimal(BigDecimal("201.02"), "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
 
             // when
@@ -144,6 +145,23 @@ internal class ExcelConverterTest {
             assertThrows<NullAnnotationException> {
                 ExcelConverter().getObjectStream(workbook, given::class)
             }
+        }
+
+        @Test
+        @DisplayName("ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 없는경우 NullElementException을 던진다.")
+        fun `ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 없는경우 NullElementException을 던진다`() {
+            // given
+            val path = "src/test/resources/ExcelFileWrongColumnName.xlsx"
+            val file = File(path)
+            val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
+            val workbook = ExcelReader().getWorkbook(file)
+
+            // when
+            // then
+            val exception: NullElementException = assertThrows<NullElementException> {
+                ExcelConverter().getObjectStream(workbook, given::class)
+            }
+            println(exception.message);
         }
 
     }

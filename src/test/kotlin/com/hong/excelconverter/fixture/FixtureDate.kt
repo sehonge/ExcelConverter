@@ -21,7 +21,7 @@ data class FixtureBusinessType(
     @Name("BusinessType") @TypeConverter(convert = BusinessTypeEnumConverter::class) val businessType: BusinessType
 )
 
-data class TestBigDecimal (
+data class FixtureBigDecimal (
     @Name("checksum") @Essential val checksum: BigDecimal,
     @Name("BrandName") @Essential val brandName: String,
     @Name("BirthDay") @TypeConverter(convert = LocalDateConverter::class) val birthDay: LocalDate?

@@ -147,7 +147,8 @@ class ExcelConverter : ExcelConvertable {
 
         row.forEach { cell: Cell ->
             if (cell.cellType == CellType.STRING && cell.columnIndex > 0) {
-                columnIdxToPropertyName[colIdx++] = annotationToProperty[cell.stringCellValue].toString()
+                columnIdxToPropertyName[colIdx++] =
+                    annotationToProperty[cell.stringCellValue] ?: throw NullElementException("${cell.stringCellValue} is Not Exist in Property")
             }
             else colIdx++
         }
