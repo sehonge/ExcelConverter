@@ -145,6 +145,7 @@ class ExcelConverter : ExcelConvertable {
         val columnIdxToPropertyName: MutableMap<Int, String> = HashMap<Int, String>()
         var colIdx: Int = 0
 
+        // TODO() 여기서 property의 값이 언급이 안된것이 있는지 검출해야함.
         row.forEach { cell: Cell ->
             if (cell.cellType == CellType.STRING && cell.columnIndex > 0) {
                 columnIdxToPropertyName[colIdx++] =

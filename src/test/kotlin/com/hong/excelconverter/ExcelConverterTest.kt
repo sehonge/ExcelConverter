@@ -148,10 +148,30 @@ internal class ExcelConverterTest {
         }
 
         @Test
-        @DisplayName("ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 없는경우 NullElementException을 던진다.")
-        fun `ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 없는경우 NullElementException을 던진다`() {
+        @DisplayName("ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column의 이름이 잘못된 경우 NullElementException을 던진다.")
+        fun `ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column의 이름이 잘못된 경우 NullElementException을 던진다`() {
             // given
             val path = "src/test/resources/ExcelFileWrongColumnName.xlsx"
+            val file = File(path)
+            val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
+            val workbook = ExcelReader().getWorkbook(file)
+
+            // when
+            // then
+            val exception: NullElementException = assertThrows<NullElementException> {
+                ExcelConverter().getObjectStream(workbook, given::class)
+            }
+            println(exception.message);
+        }
+
+        /*
+        순회하는 과정에서 검출해야할듯.
+         */
+        @Test
+        @DisplayName("ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 Blank인 경우 NullElementException을 던진다.")
+        fun `ExcelFile에 metaData 클래스의 Name Annotation에 대응되는 Column이 Blank인 경우 NullElementException을 던진다`() {
+            // given
+            val path = "src/test/resources/ExcelFileWrongColumn.xlsx"
             val file = File(path)
             val given = FixtureDate("check", "pong", LocalDate.of(1994,6,5))
             val workbook = ExcelReader().getWorkbook(file)
